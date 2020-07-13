@@ -1,0 +1,77 @@
+<div class="row">
+  <ul id="progress">
+    <li *ngFor="let step of steps" (click)="changeStep(step, $event)">{{step.name}} <a
+        (click)="removeStep(step, $event)">-</a></li>
+    <li (click)="addStep()">+</li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="col">
+    <button type="button" class="btn btn-primary" style="float: right;" (click)="addNewItem()">Add New Item</button>
+  </div>
+</div>
+
+<div class="row" *ngFor="let item of viewStep.items">
+  <div class="col">
+    <div class="row">
+      <h2>
+        <span class="badge badge-primary" (click)="editItem(item, $event)">{{item.title}}
+          <a (click)="removeItem(item, $event)">-</a>
+        </span>
+      </h2>
+    </div>
+    <div class="row">
+      <hr class="line">
+    </div>
+    <div class="row">
+      <ul>
+        <li>{{item.title}}</li>
+        <li>{{item.description}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <h2><span class="badge badge-primary">Add/Edit</span></h2>
+    </div>
+    <div class="row">
+      <hr class="line">
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <form>
+          <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="title" placeholder="Title" [(ngModel)]="addEditItem.title" name="title">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputDescription" placeholder="Description" [(ngModel)]="addEditItem.description" name="description">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-4">
+        <button type="button" class="btn btn-primary" (click)="saveItem()">Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-4">
+    <button type="button" class="btn btn-primary" (click)="prevStep()" [disabled]="steps.indexOf(viewStep) == 0">Prev</button>
+  </div>
+  <div class="col-4">
+    <button type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="steps.indexOf(viewStep) == steps.length-1">Next</button>
+  </div>
+</div>
